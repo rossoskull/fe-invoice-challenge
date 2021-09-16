@@ -1,0 +1,24 @@
+@import "../../sass/imports";
+
+.invoice {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  &__contents {
+    height: calc( 100vh - 54px );
+    width: 100vw;
+    display: flex;
+
+
+    .list {
+      width: 300px;
+      background-color: $black;
+    }
+
+    .details {
+      width: calc( 100vw - 300px );
+      background-color: $grey;
+    }
+  }
+}

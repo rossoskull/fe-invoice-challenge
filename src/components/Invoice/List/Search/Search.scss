@@ -1,0 +1,28 @@
+@import "../../../../sass/imports";
+
+.search {
+  margin: 20px;
+  background-color: rgba($white, .1);
+  height: 40px;
+  display: flex;
+  padding: 10px 20px;
+  border-radius: 30px;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+
+  &__icon {
+    height: 15px;
+  }
+
+  &__field {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    color: $white;
+
+    &:hover, &:active, &:focus {
+      outline: none;
+    }
+  }
+}
