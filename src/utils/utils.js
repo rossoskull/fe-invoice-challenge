@@ -21,7 +21,13 @@ export class Invoice {
     } else {
       this.id = uuidv4()
     }
-    this.customer = { ...customer }
+    this.customer = {
+      name: customer.name || '',
+      address: customer.address || '',
+      contact: customer.contact || '',
+      email: customer.email || '',
+      pincode: customer.pincode || ''
+    }
     this.orderNumber = orderNumber
     this.tax = tax
     this.discount = discount
@@ -74,9 +80,9 @@ export class Invoice {
   }
 
   setTDValue (value, field) {
-    console.log('class', value, field)
-    if (field === 'tax') this.tax = parseFloat(value)
-    if (field === 'discount') this.discount = parseFloat(value)
+    const setValue = value ? value : 0
+    if (field === 'tax') this.tax = parseFloat(setValue)
+    if (field === 'discount') this.discount = parseFloat(setValue)
   }
 
   setItems (list) {
@@ -91,6 +97,31 @@ export class Invoice {
     }, 0)
     console.log(grandTotal, this.items)
     return grandTotal
+  }
+
+  getTotalValues () {
+    if (!this) return {
+      subTotal: 0,
+      totalTax: 0,
+      totalDiscount: 0,
+      grandTotal: 0
+    }
+    const subTotal = this.items.reduce((previous, current) => {
+      const total = current.price * current.quantity
+      return total + previous
+    }, 0)
+
+    const totalTax = this.tax ? (subTotal * this.tax) / 100 : 0
+    const totalDiscount = this.discount ? (subTotal * this.discount) / 100 : 0
+
+    const grandTotal = subTotal + totalTax - totalDiscount
+
+    return {
+      subTotal,
+      totalTax,
+      totalDiscount,
+      grandTotal
+    }
   }
 }
 

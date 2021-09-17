@@ -30,13 +30,13 @@ const List = ({ list }) => {
 
           <div className="list__container__items__item__left__customer">
             <p className="list__container__items__item__left__customer__count">Items - {item.items.length}</p>
-            <p className="list__container__items__item__left__customer__name">{item.customer.name}</p>
+            <p className="list__container__items__item__left__customer__name">{item.customer.name || 'Unknown Customer'}</p>
           </div>
         </div>
 
         <div className="list__container__items__item__right">
           <p className="list__container__items__item__right__date">{item.getDate()}</p>
-          <p className="list__container__items__item__right__amount">$ 4000</p>
+          <p className="list__container__items__item__right__amount">$ {item.getTotalValues().grandTotal}</p>
         </div>
       </div>
     ))

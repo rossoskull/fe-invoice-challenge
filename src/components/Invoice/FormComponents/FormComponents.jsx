@@ -145,7 +145,7 @@ export const PartOneFooter = ({ next }) => {
 // Components for part two of the form
 
 // contents of part two
-export const PartTwoContent = ({ previous, invoice, updateTD, updateInvoiceItems }) => {
+export const PartTwoContent = ({ previous, invoice, updateTD, updateInvoiceItems, subTotal }) => {
   // State
   const [dataList, setDataList] = useState([])
   const [newItem, setNewItem] = useState({
@@ -279,43 +279,34 @@ export const PartTwoContent = ({ previous, invoice, updateTD, updateInvoiceItems
         </div>
         <div className="form2__content__footer__total">
           <p className="form2__content__footer__total__text">Sub Total</p>
-          <p className="form2__content__footer__total__value">$ 300</p>
+          <p className="form2__content__footer__total__value">$ {subTotal}</p>
         </div>
       </div>
     </div>
   )
 }
 
-export const PartTwoFooter = ({ invoice, items, discount }) => {
-  // State
-  const [totalDiscount, setTotalDiscount] = useState(0)
-  const [totalTax, setTotalTax] = useState(0)
-
-  // Calculate tax and discount values
-  useEffect(() => {
-    console.log(items, discount)
-    const newDiscount = invoice.getDiscountValue()
-    setTotalDiscount(newDiscount)
-  }, [invoice, items, discount])
+export const PartTwoFooter = ({ totalValues, handleSubmit }) => {
+  
   return (
     <div className="form2__footer">
       <div className="form2__footer__calculations">
         <div className="form2__footer__calculations__calc">
           <p className="form2__footer__calculations__calc__title">Tax</p>
-          <p className="form2__footer__calculations__calc__value">$ 200</p>
+          <p className="form2__footer__calculations__calc__value">$ {totalValues.totalTax}</p>
         </div>
         <div className="form2__footer__calculations__calc">
           <p className="form2__footer__calculations__calc__title">Discount</p>
-          <p className="form2__footer__calculations__calc__value">$ {totalDiscount}</p>
+          <p className="form2__footer__calculations__calc__value">$ {totalValues.totalDiscount}</p>
         </div>
       </div>
 
       <div className="form2__footer__action">
         <div className="form2__footer__action__total">
           <p className="form2__footer__action__total__title">Grand Total</p>
-          <p className="form2__footer__action__total__value">$ 1000</p>
+          <p className="form2__footer__action__total__value">$ {totalValues.grandTotal}</p>
         </div>
-        <button className="footer-button">
+        <button className="footer-button" onClick={handleSubmit}>
           Save
         </button>
       </div>

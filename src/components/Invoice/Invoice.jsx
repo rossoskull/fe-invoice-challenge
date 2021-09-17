@@ -16,6 +16,12 @@ const InvoiceApp = () => {
   const [formPage, setFormPage] = useState(1)
   const [newInvoice, setNewInvoice] = useState(null)
   const [openCreateModal, setOpenCreateModal] = useState(false)
+  const [totalValues, setTotalValues] = useState({
+    totalTax: 0,
+    totalDiscount: 0,
+    subTotal: 0,
+    grandTotal: 0
+  })
 
   // componentDidMount
   useEffect(() => {
@@ -30,13 +36,19 @@ const InvoiceApp = () => {
       )
     })
 
-    setInvoices(validInvoiceList)
+    // setInvoices(validInvoiceList)
   }, [])
 
   const closeForm = () => {
     setNewInvoice(null)
     setFormPage(1)
     setOpenCreateModal(false)
+    setTotalValues({
+      totalTax: 0,
+      totalDiscount: 0,
+      subTotal: 0,
+      grandTotal: 0
+    })
   }
 
   const openForm = () => {
@@ -69,11 +81,27 @@ const InvoiceApp = () => {
 
   const updateInvoiceTaxDiscount = (e, field) => {
     const value = e.target.value
-    newInvoice.setTDValue(value, field)
+    if (value >= 0 && value <= 100) {
+      newInvoice.setTDValue(value, field)
+      calculateTotals()
+    }
   }
 
   const updateInvoiceItems = (list) => {
     newInvoice.setItems(list)
+    calculateTotals()
+  }
+
+  const calculateTotals = () => {
+    const newTotals = newInvoice.getTotalValues()
+    setTotalValues(newTotals)
+  }
+
+  const handleSubmit = () => {
+    const newInvoices = [...invoices]
+    newInvoices.push(newInvoice)
+    setInvoices(newInvoices)
+    closeForm()
   }
 
   return (
@@ -103,15 +131,15 @@ const InvoiceApp = () => {
               invoice={newInvoice}
               updateTD={updateInvoiceTaxDiscount}
               updateInvoiceItems={updateInvoiceItems}
+              subTotal={totalValues.subTotal}
             />
           )}
           footer={formPage === 1 ? (
             <PartOneFooter next={openNextFormPage} invoice={newInvoice} />
           ) : (
             <PartTwoFooter
-              invoice={newInvoice}
-              items={newInvoice.getItems()}
-              discount={newInvoice.getDiscount()}
+              totalValues={totalValues}
+              handleSubmit={handleSubmit}
             />
           )}
         />
