@@ -23,4 +23,13 @@
     overflow: hidden;
     height: fit-content;
   }
+
+  &__no-details {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 100px;
+    text-transform: uppercase;
+    color:rgba($black, .3);
+    font-weight: bold;
+  }
 }

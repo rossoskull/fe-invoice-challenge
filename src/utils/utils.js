@@ -151,3 +151,43 @@ export class Item {
     }
   }
 }
+
+export const saveAllInvoicesInLS = (items) => {
+  const itemsJson = items.map((item) => item.toJson())
+  localStorage.setItem('allItems', JSON.stringify(itemsJson))
+}
+
+export const getAllInvoicesFromLS = () => {
+  const allItems = localStorage.getItem('allItems') || ''
+  if (allItems.length > 0) {
+    return JSON.parse(allItems)
+  } else {
+    return []
+  }
+}
+
+export const saveCurrentInvoiceInLS = (invoice) => {
+  const invoiceJson = JSON.stringify(invoice.toJson())
+
+  if (invoiceJson) {
+    localStorage.setItem('print', invoiceJson)
+  }
+}
+
+export const getCurrentInvoiceFromLS = () => {
+  const invoice = localStorage.getItem('print') || ''
+
+  if (invoice) {
+    const invoiceJson = JSON.parse(invoice)
+    const obj = new Invoice(
+      invoiceJson.id,
+      invoiceJson.customer,
+      invoiceJson.orderNumber,
+      invoiceJson.tax,
+      invoiceJson.discount,
+      invoiceJson.items
+    )
+
+    return obj
+  }
+}

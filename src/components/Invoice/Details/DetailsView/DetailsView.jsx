@@ -1,4 +1,8 @@
+import { useState } from "react"
+import { Redirect } from "react-router-dom"
+
 import ItemsTable from "../../../ItemsTable/ItemsTable"
+import { saveCurrentInvoiceInLS } from '../../../../utils/utils'
 
 import './DetailsView.scss'
 
@@ -12,7 +16,16 @@ const defaultInvoice = {
 }
 
 const DetailsView = ({ invoice = defaultInvoice, print }) => {
-  console.log(invoice)
+  // State
+  const [redirect, setRedirect] = useState(false)
+
+  const handlePrintClick = () => {
+    saveCurrentInvoiceInLS(invoice)
+    setRedirect(true)
+  }
+
+  if (redirect) return <Redirect to="/print" />
+
   return (
     <div className="details-view">
       <div className="details-view__header">
@@ -27,10 +40,15 @@ const DetailsView = ({ invoice = defaultInvoice, print }) => {
             <p className="details-view__header__right__info__name">{invoice.customer.name || 'Unknown Customer'}</p>
             <p className="details-view__header__right__info__email">{invoice.customer.email || 'No email provided'}</p>
           </div>
-          <button className="details-view__header__right__button">
-            <span>Print</span>
-            <img src="/assets/printer-blue@2x.png" alt="Print" />
-          </button>
+          {!print && (
+            <button
+              className="details-view__header__right__button"
+              onClick={handlePrintClick}
+            >
+              <span>Print</span>
+              <img src="/assets/printer-blue@2x.png" alt="Print" />
+            </button>
+          )}
         </div>
       </div>
 

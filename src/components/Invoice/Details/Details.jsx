@@ -11,11 +11,17 @@ const Details = ({ details }) => {
           Invoice details
         </p>
 
-        <div className="details__view-container">
-          <DetailsView
-            invoice={details}
-          />
-        </div>
+        {details ? (
+          <div className="details__view-container">
+            <DetailsView
+              invoice={details}
+            />
+          </div>
+        ) : (
+          <p className="details__no-details">
+            No details to view
+          </p>
+        )}
       </div>
     </div>
   )

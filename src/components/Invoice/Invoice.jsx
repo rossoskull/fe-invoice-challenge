@@ -4,8 +4,7 @@ import Header from './Header/Header'
 import List from './List/List'
 import Details from './Details/Details'
 import Modal from '../Modal/Modal'
-import { Invoice } from '../../utils/utils'
-import { dummyData } from '../../utils/dummy'
+import { getAllInvoicesFromLS, Invoice, saveAllInvoicesInLS } from '../../utils/utils'
 import { PartOneContent, PartOneFooter, PartOneHeader, PartTwoContent, PartTwoFooter } from './FormComponents/FormComponents'
 
 import './Invoice.scss'
@@ -33,20 +32,23 @@ const InvoiceApp = () => {
 
   // componentDidMount
   useEffect(() => {
-    const validInvoiceList = dummyData.map((invoice) => {
-      return new Invoice(
-        invoice.id,
-        invoice.customer,
-        invoice.orderNumber,
-        invoice.tax,
-        invoice.discount,
-        invoice.items
-      )
-    })
-
-    setInvoices(validInvoiceList)
-    if (validInvoiceList.length > 0) {
-      setCurrentDetails(0)
+    const previousItems = getAllInvoicesFromLS()
+    if (previousItems) {
+      const validInvoiceList = previousItems.map((invoice) => {
+        return new Invoice(
+          invoice.id,
+          invoice.customer,
+          invoice.orderNumber,
+          invoice.tax,
+          invoice.discount,
+          invoice.items
+        )
+      })
+  
+      setInvoices(validInvoiceList)
+      if (validInvoiceList.length > 0) {
+        setCurrentDetails(0)
+      }
     }
   }, [])
 
@@ -114,8 +116,8 @@ const InvoiceApp = () => {
       alert('Insert atleast 1 item')
       return
     }
-    const newInvoices = [...invoices]
-    setInvoices([newInvoice, ...newInvoices])
+    const newList = [newInvoice, ...invoices]
+    setInvoices(newList)
     setCurrentDetails(0)
     const el = document.getElementById('list-container')
     if (el) el.scrollTop = 0
@@ -134,6 +136,8 @@ const InvoiceApp = () => {
       address: '',
       pincode: ''
     })
+
+    saveAllInvoicesInLS(newList)
 
     closeForm()
   }

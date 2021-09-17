@@ -1,0 +1,43 @@
+@import '../../sass/imports';
+
+.print {
+
+  &__actions {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+
+    button {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 20px;
+      color: $grey;
+
+      img {
+        height: 14px;
+      }
+
+      &.print-button {
+        background-color: $grey;
+        color: $black;
+        color: $lightblue;
+      }
+    }
+  }
+}
+
+@media print {
+  body {
+    background-color: #fff !important;
+    width: 8.27in;
+    height: 11.69in;
+  }
+
+  .no-print {
+    display: none;
+  }
+}
