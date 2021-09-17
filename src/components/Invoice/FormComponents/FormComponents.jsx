@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useEffect } from 'react/cjs/react.development'
-import { Item } from '../../../utils/utils'
+import { decorator, Item } from '../../../utils/utils'
 
 import ItemsTable from '../../ItemsTable/ItemsTable'
 
@@ -279,7 +279,7 @@ export const PartTwoContent = ({ previous, invoice, updateTD, updateInvoiceItems
         </div>
         <div className="form2__content__footer__total">
           <p className="form2__content__footer__total__text">Sub Total</p>
-          <p className="form2__content__footer__total__value">$ {subTotal}</p>
+          <p className="form2__content__footer__total__value">$ {decorator(subTotal)}</p>
         </div>
       </div>
     </div>
@@ -293,18 +293,18 @@ export const PartTwoFooter = ({ totalValues, handleSubmit }) => {
       <div className="form2__footer__calculations">
         <div className="form2__footer__calculations__calc">
           <p className="form2__footer__calculations__calc__title">Tax</p>
-          <p className="form2__footer__calculations__calc__value">$ {totalValues.totalTax}</p>
+          <p className="form2__footer__calculations__calc__value">$ {decorator(totalValues.totalTax)}</p>
         </div>
         <div className="form2__footer__calculations__calc">
           <p className="form2__footer__calculations__calc__title">Discount</p>
-          <p className="form2__footer__calculations__calc__value">$ {totalValues.totalDiscount}</p>
+          <p className="form2__footer__calculations__calc__value">$ {decorator(totalValues.totalDiscount)}</p>
         </div>
       </div>
 
       <div className="form2__footer__action">
         <div className="form2__footer__action__total">
           <p className="form2__footer__action__total__title">Grand Total</p>
-          <p className="form2__footer__action__total__value">$ {totalValues.grandTotal}</p>
+          <p className="form2__footer__action__total__value">$ {decorator(totalValues.grandTotal)}</p>
         </div>
         <button className="footer-button" onClick={handleSubmit}>
           Save

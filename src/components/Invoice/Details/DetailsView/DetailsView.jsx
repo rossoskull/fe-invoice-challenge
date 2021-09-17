@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Redirect } from "react-router-dom"
 
 import ItemsTable from "../../../ItemsTable/ItemsTable"
-import { saveCurrentInvoiceInLS } from '../../../../utils/utils'
+import { saveCurrentInvoiceInLS, decorator } from '../../../../utils/utils'
 
 import './DetailsView.scss'
 
@@ -57,19 +57,19 @@ const DetailsView = ({ invoice = defaultInvoice, print }) => {
       <div className="details-view__footer">
         <div className="details-view__footer__cost">
           <p className="details-view__footer__cost__label">Sub Total</p>
-          <p className="details-view__footer__cost__value">$ {invoice.getTotalValues().subTotal}</p>
+          <p className="details-view__footer__cost__value">$ {decorator(invoice.getTotalValues().subTotal)}</p>
         </div>
         <div className="details-view__footer__cost">
           <p className="details-view__footer__cost__label">Tax ({invoice.tax}%)</p>
-          <p className="details-view__footer__cost__value">$ {invoice.getTotalValues().totalTax}</p>
+          <p className="details-view__footer__cost__value">$ {decorator(invoice.getTotalValues().totalTax)}</p>
         </div>
         <div className="details-view__footer__cost">
           <p className="details-view__footer__cost__label">Discount ({invoice.discount}%)</p>
-          <p className="details-view__footer__cost__value">$ {invoice.getTotalValues().totalDiscount}</p>
+          <p className="details-view__footer__cost__value">$ {decorator(invoice.getTotalValues().totalDiscount)}</p>
         </div>
         <div className="details-view__footer__cost total">
           <p className="details-view__footer__cost__label">Grand Total</p>
-          <p className="details-view__footer__cost__value">$ {invoice.getTotalValues().grandTotal}</p>
+          <p className="details-view__footer__cost__value">$ {decorator(invoice.getTotalValues().grandTotal)}</p>
         </div>
       </div>
     </div>

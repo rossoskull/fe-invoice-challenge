@@ -8,12 +8,13 @@
   height: 600px;
   width: 700px;
   background-color: $white;
-  transform: translate(-50%, -50%);
   z-index: 2;
   border-radius: 5px;
   box-shadow: 3px 3px 8px rgba($black, .2);
   flex-flow: column;
   overflow: hidden;
+  transform-origin: center;
+  animation: modal-fade-in .15s ease-out forwards;
 
   &__header {
     padding: 20px;
@@ -59,7 +60,28 @@
     height: 100vh;
     width: 100vw;
     z-index: 1;
-    background-color: rgba($black, .3);
+    animation: backdrop-animation .15s ease-out forwards;
+  }
+}
+
+@keyframes backdrop-animation {
+  0% {
+    backdrop-filter: blur(0px);
+    background-color: transparent;
+  }
+  100% {
     backdrop-filter: blur(2px);
+    background-color: rgba($black, .3);
+  }
+}
+
+@keyframes modal-fade-in {
+  0% {
+    transform: scale(.7) translate(-50%, -50%);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translate(-50%, -50%);
+    opacity: 1;
   }
 }

@@ -191,3 +191,10 @@ export const getCurrentInvoiceFromLS = () => {
     return obj
   }
 }
+
+export const decorator = (value) => {
+  return parseFloat(value).toLocaleString('en', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+}

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Search from './Search/Search'
 
 import './List.scss'
+import { decorator } from '../../../utils/utils'
 
 const List = ({ list, handleDetailsChange, currentDetails }) => {
   // State
@@ -32,7 +33,7 @@ const List = ({ list, handleDetailsChange, currentDetails }) => {
 
         <div className="list__container__items__item__right">
           <p className="list__container__items__item__right__date">{item.getDate()}</p>
-          <p className="list__container__items__item__right__amount">$ {item.getTotalValues().grandTotal}</p>
+          <p className="list__container__items__item__right__amount">$ {decorator(item.getTotalValues().grandTotal)}</p>
         </div>
       </div>
     ))
