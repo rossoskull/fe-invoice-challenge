@@ -66,7 +66,7 @@ const DetailsView = ({ invoice = defaultInvoice, print }) => {
         </div>
         <div className="details-view__footer__cost">
           <p className="details-view__footer__cost__label">Discount ({invoice.discount}%)</p>
-          <p className="details-view__footer__cost__value">$ {decorator(invoice.getTotalValues().totalDiscount)}</p>
+          <p className="details-view__footer__cost__value">$ -{decorator(invoice.getTotalValues().totalDiscount)}</p>
         </div>
         <div className="details-view__footer__cost total">
           <p className="details-view__footer__cost__label">Grand Total</p>
