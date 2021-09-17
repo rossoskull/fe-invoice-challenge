@@ -1,0 +1,65 @@
+@import "../../sass/imports";
+
+.modal {
+  display: flex;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  height: 600px;
+  width: 700px;
+  background-color: $white;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  border-radius: 5px;
+  box-shadow: 3px 3px 8px rgba($black, .2);
+  flex-flow: column;
+  overflow: hidden;
+
+  &__header {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__close {
+      background-color: transparent;
+      border: none;
+      height: 30px;
+      width: 30px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: .15s;
+
+      &:hover {
+        background-color: $grey;
+        cursor: pointer;
+      }
+
+      &__img {
+        height: 20px;
+      }
+    }
+  }
+
+  &__content {
+    flex-grow: 1;
+  }
+
+  &__footer {
+    padding: 20px;
+    background-color: $grey;
+  }
+
+  &__backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    z-index: 1;
+    background-color: rgba($black, .3);
+    backdrop-filter: blur(2px);
+  }
+}

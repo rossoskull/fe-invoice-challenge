@@ -48,6 +48,14 @@ export class Invoice {
     }
   }
 
+  getItems () {
+    return this.items
+  }
+
+  getDiscount () {
+    return this.discount
+  }
+
   getDate () {
     const date = new Date(this.createdAt)
 
@@ -57,6 +65,32 @@ export class Invoice {
     const period = date.getHours() > 12 ? 'PM' : 'AM'
 
     return `${hour}:${minutes} ${period}`
+  }
+
+  setCustomerValue (value, field) {
+    const currentCustomer = { ...this.customer }
+    currentCustomer[field] = value
+    this.customer = currentCustomer
+  }
+
+  setTDValue (value, field) {
+    console.log('class', value, field)
+    if (field === 'tax') this.tax = parseFloat(value)
+    if (field === 'discount') this.discount = parseFloat(value)
+  }
+
+  setItems (list) {
+    this.items = [...list]
+  }
+
+  getDiscountValue () {
+    if (!this) return 0
+    let grandTotal = this.items.reduce((previous, current) => {
+      const total = current.price * current.quantity
+      return total + previous
+    }, 0)
+    console.log(grandTotal, this.items)
+    return grandTotal
   }
 }
 

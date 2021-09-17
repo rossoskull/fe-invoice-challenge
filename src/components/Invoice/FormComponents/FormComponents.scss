@@ -1,0 +1,412 @@
+@import "../../../sass/imports";
+
+.form1 {
+  &__header {
+    display: flex;
+    gap: 20px;
+    align-items: baseline;
+
+    &__title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    &__invoice-number {
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: bold;
+      color: rgba($black, .5);
+    }
+  }
+
+  &__content {
+    padding: 0 20px;
+
+    &__section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 5px;
+      border-bottom: 1px solid rgba($black, .1);
+      margin-bottom: 20px;
+
+      &__title {
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: bold;
+
+      }
+
+      &__button {
+        border: none;
+        padding: 10px;
+        background-color: $grey;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: .15s;
+
+        &__text {
+          color: $lightblue;
+          font-weight: bold;
+          text-transform: uppercase;
+          font-size: 12px;
+          letter-spacing: 1px;
+          border-radius: 2px;
+        }
+
+        &__img {
+          height: 12px;
+        }
+
+        &:hover {
+          background-color: rgba($black, .1);
+          cursor: pointer;
+        }
+      }
+    }
+
+    &__fields {
+      display: flex;
+      gap: 30px;
+
+      &__left {
+        flex-grow: 1;
+      }
+
+      &__right {
+        flex-grow: .6;
+      }
+    }
+
+    .field-group {
+      display: flex;
+      width: 100%;
+      flex-flow: column;
+      margin-bottom: 30px;
+
+      &__label {
+        font-size: 13px;
+        margin-bottom: 10px;
+
+        .required {
+          color: red;
+          margin-left: 3px;
+        }
+      }
+
+      &__field {
+        padding: 10px;
+        border: 1px solid rgba($black, .1);
+        border-radius: 5px;
+
+        &:focus, &:active {
+          outline: none;
+        }
+
+        &::placeholder {
+          color: rgba($black, .2);
+          letter-spacing: 1px;
+        }
+      }
+
+      textarea {
+        font-family: 'Montserrat', sans-serif;
+        height: 132px;
+        resize: none;
+      }
+
+      &__phone {
+        display: flex;
+        width: 100%;
+        border: 1px solid rgba($black, .1);
+        border-radius: 5px;
+        overflow: hidden;
+
+        &__code {
+          background-color: $grey;
+          height: 37px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 60px;
+        }
+
+        input {
+          border: none;
+          border-radius: 0;
+          flex-grow: 1;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.footer-button {
+  text-transform: uppercase;
+  background-color: $lightblue;
+  font-size: 11px;
+  font-weight: bold;
+  border: none;
+  color: $white;
+  padding: 10px 40px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 4px rgba($black, .1);
+  transition: .15s;
+  height: 32px;
+
+  &:hover {
+    background-color: darken($lightblue, 1.3);
+    cursor: pointer;
+  }
+}
+
+// Form 2 styles
+.form2 {
+  &__content {
+    padding: 0 20px;
+    position: relative;
+    height: 458px;
+
+    &__section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 15px;
+      border-bottom: 1px solid rgba($black, .1);
+      margin-bottom: 20px;
+
+      &__title {
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      &__customer {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+
+        &__info {
+          text-align: right;
+
+          &__title {
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 1px;
+            color: rgba($black, .5);
+            margin-bottom: 10px;
+          }
+
+          &__name {
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: bold;
+          }
+
+          &__email {
+            font-size: 13px;
+            letter-spacing: 1px;
+            color: $black;
+          }
+        }
+
+        &__edit {
+          background-color: transparent;
+          border: 0;
+          padding: 10px;
+          transition: .15s;
+          height: 40px;
+          width: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 5px;
+
+          &__img {
+            height: 30px;
+          }
+
+          &:hover {
+            background-color: rgba($black, .1);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    &__table {
+      height: fit-content;
+      max-height: 200px;
+      overflow: auto;
+    }
+
+    &__inputs {
+      padding: 10px;
+      border-top: 1px solid rgba($black, .1);
+      border-bottom: 1px solid rgba($black, .1);
+      display: flex;
+      justify-content: space-between;
+
+      &__name, &__quantity, &__price {
+        background-color: transparent;
+        border: 1px solid rgba($black, .1);
+        padding: 10px;
+        border-radius: 3px;
+        transition: .15s;
+
+        &::placeholder {
+          color:rgba($black, .2);
+        }
+
+        &:active, &:focus {
+          outline: none;
+          border-color: rgba($black, .7);
+        }
+      }
+
+      &__name {
+        width: 50%;
+      }
+
+      &__quantity, &__price {
+        width: 18%;
+      }
+
+      &__submit {
+        background-color: transparent;
+        border: 2px solid $lightblue;
+        border-radius: 3px;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: .15s;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba($black, .1);
+        }
+
+        img {
+          height: 14px;
+        }
+      }
+    }
+
+    &__footer {
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: calc( 100% - 40px );
+      padding: 10px 0px;
+      border-top: 1px solid rgba($black, .1);
+
+      &__fields {
+        display: flex;
+        gap: 10px;
+
+        &__field {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 10px;
+          border-radius: 3px;
+          border: 1px solid rgba($black, .1);
+
+          input {
+            background-color: transparent;
+            border: none;
+            width: 70px;
+
+            &:active, &:focus {
+              outline: none;
+            }
+          }
+
+          p {
+            font-size: 12px;
+            font-weight: bold;
+          }
+        }
+      }
+
+      &__total {
+        display: flex;
+        gap: 30px;
+
+        &__text {
+          font-size: 12px;
+          font-weight: bold;
+          color:rgba($black, .5);
+        }
+
+        &__value {
+          font-weight: bold;
+          letter-spacing: 1px;
+          font-size: 12px;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &__calculations, &__action {
+      display: flex;
+      gap: 60px;
+    }
+
+    &__calculations {
+      &__calc {
+        &__title {
+          font-size: 12px;
+          color: rgba($black, .5);
+          margin-bottom: 5px;
+        }
+
+        &__value {
+          color: rgba($black, .8);
+          font-size: 12px;
+          font-weight: bold;
+          
+          &.zero {
+            color: rgba($black, .2);
+          }
+        }
+      }
+    }
+
+    &__action {
+      &__total {
+        &__title {
+          font-size: 12px;
+          color: rgba($black, .5);
+          margin-bottom: 5px;
+        }
+
+        &__value {
+          color: $black;
+          font-size: 12px;
+          font-weight: bold;
+          
+          &.zero {
+            color: rgba($black, .2);
+          }
+        }
+      }
+    }
+  }
+}
