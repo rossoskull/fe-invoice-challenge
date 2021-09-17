@@ -5,7 +5,7 @@ const Header = ({ openForm }) => {
     <div className="header">
       <p className="header__title">Dashboard</p>
       <button onClick={openForm} className="header__add">
-        <img src="/assets/plus-white.png" alt="Add new invoice" />
+        <img src="/assets/plus-white@2x.png" alt="Add new invoice" />
       </button>
     </div>
   )
