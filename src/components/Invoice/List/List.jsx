@@ -14,7 +14,7 @@ const List = ({ list, handleDetailsChange, currentDetails }) => {
    */
   const renderedList = () => {
     return list.filter((item) => {
-      return item.customer.name.includes(searchStr) || item.orderNumber.toString().includes(searchStr)
+      return item.customer.name.toLowerCase().includes(searchStr.toLowerCase()) || item.orderNumber.toString().includes(searchStr)
     }).map((item, index) => (
       <div
         key={item.id}
@@ -43,7 +43,7 @@ const List = ({ list, handleDetailsChange, currentDetails }) => {
       <Search setSearchStr={setSearchStr} />
       <p className="list__count">INVOICES &middot; <span>{list.length}</span></p>
 
-      <div className="list__container">
+      <div className="list__container" id="list-container">
         <div className="list__container__items">
           {renderedList()}
         </div>

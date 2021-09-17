@@ -15,7 +15,7 @@ export const PartOneHeader = ({ invoice }) => {
   )
 }
 
-export const PartOneContent = ({ next, invoice, update }) => {
+export const PartOneContent = ({ next, invoice, update, customerDetails }) => {
   return (
     <div className="form1__content">
       <div className="form1__content__section-title">
@@ -46,7 +46,7 @@ export const PartOneContent = ({ next, invoice, update }) => {
               className="field-group__field"
               placeholder="Customer name"
               onChange={(e) => update(e, 'name')}
-              value={invoice.customer.name}
+              value={customerDetails.name}
             />
           </div>
 
@@ -63,7 +63,7 @@ export const PartOneContent = ({ next, invoice, update }) => {
               className="field-group__field"
               placeholder="Complete Address"
               onChange={(e) => update(e, 'address')}
-              value={invoice.customer.address}
+              value={customerDetails.address}
             />
           </div>
         </div>
@@ -83,7 +83,7 @@ export const PartOneContent = ({ next, invoice, update }) => {
                 type="text"
                 className="field-group__field phone"
                 onChange={(e) => update(e, 'contact')}
-                value={invoice.customer.contact}
+                value={customerDetails.contact}
               />
             </div>
           </div>
@@ -102,7 +102,7 @@ export const PartOneContent = ({ next, invoice, update }) => {
               className="field-group__field"
               placeholder="Customer Email Address"
               onChange={(e) => update(e, 'email')}
-              value={invoice.customer.email}
+              value={customerDetails.email}
             />
           </div>
 
@@ -123,7 +123,7 @@ export const PartOneContent = ({ next, invoice, update }) => {
                 width: '72px'
               }}
               onChange={(e) => update(e, 'pincode')}
-              value={invoice.customer.pincode}
+              value={customerDetails.pincode}
             />
           </div>
         </div>

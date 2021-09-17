@@ -22,6 +22,13 @@ const InvoiceApp = () => {
     subTotal: 0,
     grandTotal: 0
   })
+  const [customerDetails, setCustomerDetails] = useState({
+    name: '',
+    contact: '',
+    email: '',
+    address: '',
+    pincode: ''
+  })
   const [currentDetails, setCurrentDetails] = useState(null)
 
   // componentDidMount
@@ -81,6 +88,7 @@ const InvoiceApp = () => {
       return
     }
     newInvoice.setCustomerValue(value, field)
+    setCustomerDetails({...newInvoice.customer})
   }
 
   const updateInvoiceTaxDiscount = (e, field) => {
@@ -102,9 +110,31 @@ const InvoiceApp = () => {
   }
 
   const handleSubmit = () => {
+    if (newInvoice.items.length === 0) {
+      alert('Insert atleast 1 item')
+      return
+    }
     const newInvoices = [...invoices]
-    newInvoices.push(newInvoice)
-    setInvoices(newInvoices)
+    setInvoices([newInvoice, ...newInvoices])
+    setCurrentDetails(0)
+    const el = document.getElementById('list-container')
+    if (el) el.scrollTop = 0
+
+    setTotalValues({
+      totalTax: 0,
+      totalDiscount: 0,
+      subTotal: 0,
+      grandTotal: 0
+    })
+
+    setCustomerDetails({
+      name: '',
+      contact: '',
+      email: '',
+      address: '',
+      pincode: ''
+    })
+
     closeForm()
   }
 
@@ -136,6 +166,7 @@ const InvoiceApp = () => {
               next={openNextFormPage}
               invoice={newInvoice}
               update={updateCustomerValues}
+              customerDetails={customerDetails}
             />
           ) : (
             <PartTwoContent
