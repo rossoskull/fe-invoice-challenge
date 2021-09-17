@@ -1,10 +1,22 @@
+import DetailsView from './DetailsView/DetailsView'
+
 import './Details.scss'
 
-const Details = () => {
+const Details = ({ details }) => {
 
   return (
     <div className="details">
-      Details...
+      <div className="details__container">
+        <p className="details__title">
+          Invoice details
+        </p>
+
+        <div className="details__view-container">
+          <DetailsView
+            invoice={details}
+          />
+        </div>
+      </div>
     </div>
   )
 }

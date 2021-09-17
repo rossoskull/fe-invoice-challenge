@@ -22,6 +22,7 @@ const InvoiceApp = () => {
     subTotal: 0,
     grandTotal: 0
   })
+  const [currentDetails, setCurrentDetails] = useState(null)
 
   // componentDidMount
   useEffect(() => {
@@ -36,7 +37,10 @@ const InvoiceApp = () => {
       )
     })
 
-    // setInvoices(validInvoiceList)
+    setInvoices(validInvoiceList)
+    if (validInvoiceList.length > 0) {
+      setCurrentDetails(0)
+    }
   }, [])
 
   const closeForm = () => {
@@ -104,6 +108,10 @@ const InvoiceApp = () => {
     closeForm()
   }
 
+  const handleDetailsChange = (newIndex) => {
+    setCurrentDetails(newIndex)
+  }
+
   return (
     <div className="invoice">
       <Header openForm={openForm} />
@@ -111,8 +119,12 @@ const InvoiceApp = () => {
       <div className="invoice__contents">
         <List
           list={invoices}
+          handleDetailsChange={handleDetailsChange}
+          currentDetails={currentDetails}
         />
-        <Details />
+        <Details
+          details={invoices[currentDetails]}
+        />
       </div>
 
       {openCreateModal && (

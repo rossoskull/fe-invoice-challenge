@@ -4,17 +4,9 @@ import Search from './Search/Search'
 
 import './List.scss'
 
-const List = ({ list }) => {
+const List = ({ list, handleDetailsChange, currentDetails }) => {
   // State
   const [searchStr, setSearchStr] = useState('')
-
-  /**
-   * Set the value of search state
-   * @param {string} str - New search string value
-   */
-  const updateSearch = (str) => {
-    setSearchStr(str)
-  }
 
   /**
    * Render list of items with search filter
@@ -23,8 +15,12 @@ const List = ({ list }) => {
   const renderedList = () => {
     return list.filter((item) => {
       return item.customer.name.includes(searchStr) || item.orderNumber.toString().includes(searchStr)
-    }).map((item) => (
-      <div key={item.id} className="list__container__items__item">
+    }).map((item, index) => (
+      <div
+        key={item.id}
+        className={`list__container__items__item ${index === currentDetails && 'active'}`}
+        onClick={() => handleDetailsChange(index)}
+      >
         <div className="list__container__items__item__left">
           <p className="list__container__items__item__left__invoice-number">INV. # - {item.orderNumber}</p>
 

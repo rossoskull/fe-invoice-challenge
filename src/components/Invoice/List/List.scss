@@ -27,7 +27,7 @@
         transition: .2s;
         justify-content: space-between;
 
-        &:hover {
+        &:hover, &.active {
           cursor: pointer;
           background-color: rgba($white, .1);
         }

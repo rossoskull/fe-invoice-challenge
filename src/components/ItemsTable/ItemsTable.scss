@@ -38,19 +38,20 @@
           padding: 10px;
           font-size: 12px;
           color: $black;
-          
-        }
-        
-        &:not(:last-of-type) {
-          td {
-            border-bottom: 1px solid rgba($black, .1);
-          }
+          font-weight: 500;
+          border-bottom: 1px solid rgba($black, .1);
         }
       }
     }
 
     .item-name {
       width: 60%;
+    }
+
+    .item-name, .item-quantity, .item-price {
+      &.comfortable {
+        padding: 30px 10px;
+      }
     }
 
     .item-quantity, .item-price {

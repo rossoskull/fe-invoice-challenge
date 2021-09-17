@@ -1,7 +1,11 @@
 import './ItemsTable.scss'
 
-const ItemsTable = ({ list }) => {
+const ItemsTable = ({ list, comfortable }) => {
 
+  const classWithComfort = (className) => {
+    return comfortable ? `${className} comfortable` : className
+  }
+  
   return (
     <div className="table-container">
       <table className="table-container__table">
@@ -17,9 +21,9 @@ const ItemsTable = ({ list }) => {
             const data = i.toJson()
             return (
               <tr key={data.id}>
-                <td className="item-name">{data.name}</td>
-                <td className="item-quantity">{data.quantity}</td>
-                <td className="item-price">{data.price}</td>
+                <td className={classWithComfort('item-name')}>{data.name}</td>
+                <td className={classWithComfort('item-quantity')}>{data.quantity}</td>
+                <td className={classWithComfort('item-price')}>{parseFloat(data.price).toFixed(2)}</td>
               </tr>
             )
           })}

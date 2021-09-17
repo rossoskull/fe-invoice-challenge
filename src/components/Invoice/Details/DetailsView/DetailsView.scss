@@ -1,0 +1,119 @@
+@import "../../../../sass/imports";
+
+.details-view {
+  padding: 30px;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba($black, .1);
+    padding-bottom: 10px;
+
+    &__left {
+      &__title {
+        font-weight: bold;
+        font-size: 16px;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+
+      &__invoice-no {
+        color: rgba($black, .8);
+        text-transform: uppercase;
+        font-size: 14px;
+        margin-bottom: 2px;
+      }
+
+      &__time {
+        color: rgba($black, .5);
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: bold;
+      }
+    }
+
+    &__right { 
+      display: flex;
+      gap: 30px;
+      align-items: flex-start;
+
+      &__info {
+        text-align: right;
+
+        &__title {
+          font-size: 9px;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: rgba($black, .3);
+          margin-bottom: 10px;
+        }
+
+        &__name {
+          font-size: 12px;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: $black;
+          margin-bottom: 5px;
+        }
+
+        &__email {
+          font-size: 10px;
+          font-weight: bold;
+          text-transform: uppercase;
+          color: rgba($black, .5);
+        }
+      }
+
+      &__button {
+        background-color: $white;
+        border: 1px solid $lightblue;
+        border-radius: 3px;
+        padding: 10px;
+        display: flex;
+        gap: 8px;
+        align-items: center;
+        transition: .15s;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba($black, .1);
+        }
+
+        span {
+          font-size: 11px;
+          text-transform: uppercase;
+          color: $lightblue;
+          font-weight: bold;
+        }
+
+        img {
+          height: 16px;
+        }
+      }
+    }
+  }
+
+  &__footer {
+    display: flex;
+    flex-flow: column;
+    align-items: flex-end;
+    margin-top: 30px;
+
+    &__cost {
+      display: flex;
+      justify-content: space-between;
+      width: 200px;
+      margin-bottom: 15px;
+      font-size: 12px;
+      font-weight: 500;
+
+      &.total {
+        margin-top: 15px;
+      }
+
+      &__value {
+        font-weight: bold;
+      }
+    }
+  }
+}

@@ -29,7 +29,7 @@ const dummyData = [
   {
     id: 2,
     customer: {
-      name: 'Customer Two',
+      name: '',
       address: 'Some address',
       email: 'email2@gmail.com',
       contact: '+9876543210',
