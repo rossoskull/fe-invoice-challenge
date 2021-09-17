@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
 import Search from './Search/Search'
+import { decorator } from '../../../utils/utils'
 
 import './List.scss'
-import { decorator } from '../../../utils/utils'
 
 const List = ({ list, handleDetailsChange, currentDetails }) => {
   // State

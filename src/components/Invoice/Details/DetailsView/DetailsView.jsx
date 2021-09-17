@@ -19,6 +19,7 @@ const DetailsView = ({ invoice = defaultInvoice, print }) => {
   // State
   const [redirect, setRedirect] = useState(false)
 
+  // Go to print page
   const handlePrintClick = () => {
     saveCurrentInvoiceInLS(invoice)
     setRedirect(true)

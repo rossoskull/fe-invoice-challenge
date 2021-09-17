@@ -1,7 +1,6 @@
 import './Header.scss'
 
 const Header = ({ openForm }) => {
-
   return (
     <div className="header">
       <p className="header__title">Dashboard</p>

@@ -2,6 +2,11 @@ import './ItemsTable.scss'
 
 const ItemsTable = ({ list, comfortable }) => {
 
+  /**
+   * Update className based on comfortable value
+   * @param {string} className className of current element
+   * @returns {string} className with additional value of comfortable
+   */
   const classWithComfort = (className) => {
     return comfortable ? `${className} comfortable` : className
   }

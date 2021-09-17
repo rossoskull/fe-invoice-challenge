@@ -1,7 +1,6 @@
-import { useState } from 'react'
-import { useEffect } from 'react/cjs/react.development'
-import { decorator, Item } from '../../../utils/utils'
+import { useState, useEffect } from 'react'
 
+import { decorator, Item } from '../../../utils/utils'
 import ItemsTable from '../../ItemsTable/ItemsTable'
 
 import './FormComponents.scss'
@@ -15,7 +14,7 @@ export const PartOneHeader = ({ invoice }) => {
   )
 }
 
-export const PartOneContent = ({ next, invoice, update, customerDetails }) => {
+export const PartOneContent = ({ next, update, customerDetails }) => {
   return (
     <div className="form1__content">
       <div className="form1__content__section-title">
@@ -166,6 +165,7 @@ export const PartTwoContent = ({ previous, invoice, updateTD, updateInvoiceItems
     })
   }, [invoice.tax, invoice.discount])
 
+  // Update state values for newItem
   const updateItem = (value, field) => {
     if ((field === 'price' || field === 'quantity') && isNaN(value)) {
       return
@@ -175,6 +175,7 @@ export const PartTwoContent = ({ previous, invoice, updateTD, updateInvoiceItems
     setNewItem(oldValue)
   }
 
+  // Push newItem in current invoice's items list
   const pushItem = () => {
     if (newItem.name.length > 0 && !isNaN(newItem.price) && !isNaN(newItem.quantity) && newItem.price * newItem.quantity > 0) {
       const list = [...dataList]
@@ -287,7 +288,6 @@ export const PartTwoContent = ({ previous, invoice, updateTD, updateInvoiceItems
 }
 
 export const PartTwoFooter = ({ totalValues, handleSubmit }) => {
-  
   return (
     <div className="form2__footer">
       <div className="form2__footer__calculations">

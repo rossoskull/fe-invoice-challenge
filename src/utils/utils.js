@@ -1,5 +1,8 @@
 import { v4 as uuidv4 } from 'uuid'
 
+/**
+ * Invoice class with multiple methods to support calculations and data manipulation
+ */
 export class Invoice {
   id = null
   customer = {
@@ -43,6 +46,10 @@ export class Invoice {
     this.items = validItems
   }
 
+  /**
+   * Get value of current instance in JSON format
+   * @returns JSON object
+   */
   toJson () {
     return {
       id: this.id,
@@ -54,14 +61,23 @@ export class Invoice {
     }
   }
 
+  /**
+   * Get list of all items in this instance
+   * @returns list of all items
+   */
   getItems () {
     return this.items
   }
 
+  // TODO: remove
   getDiscount () {
     return this.discount
   }
 
+  /**
+   * Get date and time of creation of this instance
+   * @returns creation date time in string format
+   */
   getDate () {
     const date = new Date(this.createdAt)
 
@@ -70,35 +86,53 @@ export class Invoice {
 
     const period = date.getHours() > 12 ? 'PM' : 'AM'
 
-    return `${hour}:${minutes} ${period}`
+    return `${hour}:${minutes} ${period} - TODAY`
   }
 
+  /**
+   * Update values of properties in current instance's customer property
+   * @param {srting} value New value to be set
+   * @param {srting} field Field name where value should be set
+   */
   setCustomerValue (value, field) {
     const currentCustomer = { ...this.customer }
     currentCustomer[field] = value
     this.customer = currentCustomer
   }
 
+  /**
+   * Update values of tax and discount properties of current instance
+   * @param {string} value New value to be set
+   * @param {string} field Field name where value should be set
+   */
   setTDValue (value, field) {
     const setValue = value ? value : 0
     if (field === 'tax') this.tax = parseFloat(setValue)
     if (field === 'discount') this.discount = parseFloat(setValue)
   }
 
+  /**
+   * Set a new list of items in current instance
+   * @param {Array} list list of items to be set in current instance
+   */
   setItems (list) {
     this.items = [...list]
   }
 
+  // TODO: remove
   getDiscountValue () {
     if (!this) return 0
     let grandTotal = this.items.reduce((previous, current) => {
       const total = current.price * current.quantity
       return total + previous
     }, 0)
-    console.log(grandTotal, this.items)
     return grandTotal
   }
 
+  /**
+   * Get values related to current instance
+   * @returns {Object} Object having sub total, discount, tax and grand total values
+   */
   getTotalValues () {
     if (!this) return {
       subTotal: 0,
@@ -142,6 +176,10 @@ export class Item {
     this.quantity = quantity
   }
 
+  /**
+   * Fetch current instance in JSON format
+   * @returns {Object} Current instance in JSON format
+   */
   toJson () {
     return {
       id: this.id,
@@ -152,11 +190,19 @@ export class Item {
   }
 }
 
-export const saveAllInvoicesInLS = (items) => {
-  const itemsJson = items.map((item) => item.toJson())
-  localStorage.setItem('allItems', JSON.stringify(itemsJson))
+/**
+ * Save a list of invoices in localStorage
+ * @param {Array} invoices list of invoice instances
+ */
+export const saveAllInvoicesInLS = (invoices) => {
+  const invoicesJson = invoices.map((invoice) => invoice.toJson())
+  localStorage.setItem('allItems', JSON.stringify(invoicesJson))
 }
 
+/**
+ * Get the list of invoice instances from localStorage
+ * @returns {Array} list of invoice instances
+ */
 export const getAllInvoicesFromLS = () => {
   const allItems = localStorage.getItem('allItems') || ''
   if (allItems.length > 0) {
@@ -166,6 +212,10 @@ export const getAllInvoicesFromLS = () => {
   }
 }
 
+/**
+ * Save a single instance of Invoice in localStorage
+ * @param {Invoice} invoice Invoice instance
+ */
 export const saveCurrentInvoiceInLS = (invoice) => {
   const invoiceJson = JSON.stringify(invoice.toJson())
 
@@ -174,6 +224,10 @@ export const saveCurrentInvoiceInLS = (invoice) => {
   }
 }
 
+/**
+ * Get single instance of Invoice from localStorage
+ * @returns {Invoice} Invoice instance
+ */
 export const getCurrentInvoiceFromLS = () => {
   const invoice = localStorage.getItem('print') || ''
 
@@ -192,6 +246,11 @@ export const getCurrentInvoiceFromLS = () => {
   }
 }
 
+/**
+ * Decorate a value to view upto 2 decimal points and insert commas in large numbers
+ * @param {Number} value Value to be decorated
+ * @returns {string} decorated value
+ */
 export const decorator = (value) => {
   return parseFloat(value).toLocaleString('en', {
     minimumFractionDigits: 2,

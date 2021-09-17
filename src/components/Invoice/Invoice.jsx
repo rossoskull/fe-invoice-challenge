@@ -10,7 +10,7 @@ import { PartOneContent, PartOneFooter, PartOneHeader, PartTwoContent, PartTwoFo
 import './Invoice.scss'
 
 const InvoiceApp = () => {
-  // State
+  // States
   const [invoices, setInvoices] = useState([])
   const [formPage, setFormPage] = useState(1)
   const [newInvoice, setNewInvoice] = useState(null)
@@ -52,75 +52,11 @@ const InvoiceApp = () => {
     }
   }, [])
 
+  // Close the create Invoice form and reset state values for inputs
   const closeForm = () => {
     setNewInvoice(null)
     setFormPage(1)
     setOpenCreateModal(false)
-    setTotalValues({
-      totalTax: 0,
-      totalDiscount: 0,
-      subTotal: 0,
-      grandTotal: 0
-    })
-  }
-
-  const openForm = () => {
-    const newInvoice = new Invoice(null, {}, invoices.length, null, null, [])
-    setNewInvoice(newInvoice)
-    setOpenCreateModal(true)
-  }
-
-  const openNextFormPage = async (validate) => {
-    if (!validate) {
-      setFormPage(2)
-    } else {
-      const { name, contact, email } = newInvoice.customer
-      if (name && contact && email) {
-        setFormPage(2)
-      }
-    }
-  }
-
-  const openPreviousFormPage = () => setFormPage(1)
-
-  // Methods to edit form values
-  const updateCustomerValues = (e, field) => {
-    const value = e.target.value
-    if ((field === 'contact' || field === 'pincode') && isNaN(value)) {
-      return
-    }
-    newInvoice.setCustomerValue(value, field)
-    setCustomerDetails({...newInvoice.customer})
-  }
-
-  const updateInvoiceTaxDiscount = (e, field) => {
-    const value = e.target.value
-    if (value >= 0 && value <= 100) {
-      newInvoice.setTDValue(value, field)
-      calculateTotals()
-    }
-  }
-
-  const updateInvoiceItems = (list) => {
-    newInvoice.setItems(list)
-    calculateTotals()
-  }
-
-  const calculateTotals = () => {
-    const newTotals = newInvoice.getTotalValues()
-    setTotalValues(newTotals)
-  }
-
-  const handleSubmit = () => {
-    if (newInvoice.items.length === 0) {
-      alert('Insert atleast 1 item')
-      return
-    }
-    const newList = [newInvoice, ...invoices]
-    setInvoices(newList)
-    setCurrentDetails(0)
-    const el = document.getElementById('list-container')
-    if (el) el.scrollTop = 0
 
     setTotalValues({
       totalTax: 0,
@@ -136,12 +72,80 @@ const InvoiceApp = () => {
       address: '',
       pincode: ''
     })
+  }
+
+  // Open Invoice form and initiate new Invoice instance for state values
+  const openForm = () => {
+    const newInvoice = new Invoice(null, {}, invoices.length, null, null, [])
+    setNewInvoice(newInvoice)
+    setOpenCreateModal(true)
+  }
+
+  // Go to part two of the form
+  const openNextFormPage = async (validate) => {
+    if (!validate) {
+      setFormPage(2)
+    } else {
+      const { name, contact, email } = newInvoice.customer
+      if (name && contact && email) {
+        setFormPage(2)
+      }
+    }
+  }
+
+  // Go to part one of the form
+  const openPreviousFormPage = () => setFormPage(1)
+
+  // Methods to edit form values
+  // Update values of name, email, contact, address and pincode fields
+  const updateCustomerValues = (e, field) => {
+    const value = e.target.value
+    if ((field === 'contact' || field === 'pincode') && isNaN(value)) {
+      return
+    }
+    newInvoice.setCustomerValue(value, field)
+    setCustomerDetails({...newInvoice.customer})
+  }
+
+  // Update values of tax and discount fields
+  const updateInvoiceTaxDiscount = (e, field) => {
+    const value = e.target.value
+    if (value >= 0 && value <= 100) {
+      newInvoice.setTDValue(value, field)
+      calculateTotals()
+    }
+  }
+
+  // Update list of items in an invoice
+  const updateInvoiceItems = (list) => {
+    newInvoice.setItems(list)
+    calculateTotals()
+  }
+
+  // Update state values of all total calculations related to newInvoice instance
+  const calculateTotals = () => {
+    const newTotals = newInvoice.getTotalValues()
+    setTotalValues(newTotals)
+  }
+
+  // Push the newInvoice instance to invoice list, save in localstorage
+  const handleSubmit = () => {
+    if (newInvoice.items.length === 0) {
+      alert('Insert atleast 1 item')
+      return
+    }
+    const newList = [newInvoice, ...invoices]
+    setInvoices(newList)
+    setCurrentDetails(0)
+    const el = document.getElementById('list-container')
+    if (el) el.scrollTop = 0
 
     saveAllInvoicesInLS(newList)
 
     closeForm()
   }
 
+  // Choose what detail to view in details section
   const handleDetailsChange = (newIndex) => {
     setCurrentDetails(newIndex)
   }

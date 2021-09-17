@@ -1,7 +1,6 @@
 import './Search.scss'
 
 const Search = ({ setSearchStr }) => {
-
   return (
     <div className="search">
       <img

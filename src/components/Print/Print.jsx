@@ -25,7 +25,7 @@ const Print = () => {
     })
   })
 
-  // Component did mount
+  // ComponenDidMount
   useEffect(() => {
     const invoiceObject = getCurrentInvoiceFromLS()
     if (invoiceObject) {
@@ -33,10 +33,12 @@ const Print = () => {
     }
   }, [])
 
+  // Go back to '/' route
   const back = () => {
     setRedirect(true)
   }
 
+  // Print current window
   const printWindow = () => {
     window.print()
   }
